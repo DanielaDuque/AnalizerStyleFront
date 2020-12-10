@@ -11,14 +11,81 @@ import Sugerencia from "./componentes/sugerencia";
 
 
 class App extends Component {
-	state = {
-		sugerencias: []
-	}
 
+	state={
+
+        prNombr : "",
+        Complejidad : 0,
+        maxCaracterByFuntion : 0,
+        maxLinesByFuntion: 0,
+        maxLineComment: 0,
+        maxClass: 0,
+		maxFuntionByClass: 0,
+		sugerencias: []
+
+    }
+    
+    setprNombr = (param) =>{
+        this.setState({
+            prNombr: param
+        })
+             
+    }
+
+    setComplejidad = (param) =>{
+
+        param = parseInt(param)
+        this.setState({
+            Complejidad: param
+        })
+             
+    }
+
+    setmaxCaracterByFuntion = (param) =>{
+        param = parseInt(param)
+        this.setState({
+            maxCaracterByFuntion: param
+        })
+             
+    }
+
+    setmaxLinesByFuntion = (param) =>{
+        param = parseInt(param)
+        this.setState({
+            maxLinesByFuntion: param
+        })
+             
+    }
+
+    setmaxLineComment = (param) =>{
+        param = parseInt(param)
+        this.setState({
+            maxLineComment: param
+        })
+             
+    }
+
+    setmaxClass = (param) =>{
+        param = parseInt(param)
+        this.setState({
+            maxClass: param
+        })
+             
+    }
+
+    setmaxFuntionByClass = (param) =>{
+        param = parseInt(param)
+        this.setState({
+            maxFuntionByClass: param
+        })
+             
+    }
 	Analizar = (param) => {
         this.setState({
             sugerencias: param
 		})
+		console.log(this.state)
+
     }
 
 	render(){
@@ -55,7 +122,15 @@ class App extends Component {
       <body>
 	  	<div className="container">
 			<h1>Párametros personalizables</h1>
-			<Parameters>
+			<Parameters 
+				setprNombr = {this.setprNombr}
+				setComplejidad = {this.setComplejidad}			
+				setmaxCaracterByFuntion = {this.setmaxCaracterByFuntion}			
+				setmaxLinesByFuntion = {this.setmaxLinesByFuntion}			
+				setmaxLineComment = {this.setmaxLineComment}			
+				setmaxClass = {this.setmaxClass}			
+				setmaxFuntionByClass = {this.setmaxFuntionByClass}	
+			>
 			</Parameters>
 
         

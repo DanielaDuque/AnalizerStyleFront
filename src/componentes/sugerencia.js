@@ -3,6 +3,8 @@ import "../estilos/general.css"
 import "../estilos/palette.css"
 
 export default function Sugerencia(props) {
+
+    
     return(
         <div className="card aspecto border-success mb-3">
             <h4 className="card-header ">{props.error}</h4>
