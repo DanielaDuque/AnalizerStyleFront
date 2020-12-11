@@ -1,5 +1,6 @@
 import './App.css';
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import "./estilos/palette.css"
 
@@ -89,34 +90,26 @@ class App extends Component {
 	}
 	
 	postRequest=()=>{
-		fetch('https://code-style-analyzer.herokuapp.com/java/code-analysis/',{
-        method: 'POST',
-        headers: {
-			'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(
-			{
-			"complexity": 3,
-			"prnom": "2",
-			"maxLenghtName": 3,
-			"maxLenghtLinesBy": 4,
-			"maxLenghtLineComment": 5,
-			"maxClassByFile": 1,
-			"maxNumFuntionByClass": 6,
-			"text": ""
-			}
-			),
-		cache: 'no-cache'
-		})
-		.then(function(response) {
-			return response.json();
-		})
-		.then(function(data) {
-			console.log('data = ', data);
-		})
-		.catch(function(err) {
-			console.error(err);
-		});
+
+		const user = {
+			
+			complexit: 3,
+			prnom: 2,
+			maxLenghtName: 3,
+			maxLenghtLinesBy: 4,
+			maxLenghtLineComment: 5,
+			maxClassByFile: 1,
+			maxNumFuntionByClass: 6,
+			text: ""
+				
+		  };
+	  
+		  axios.post(`https://code-style-analyzer.herokuapp.com/java/code-analysis/`, { user })
+			.then(res => {
+			  console.log(res);
+			  console.log(res.data);
+			})
+		
 	}
 
 	render(){
