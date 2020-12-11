@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import "./estilos/palette.css"
 
-import prueja from "./prueja.json"
+import prueba from "./prueja.json"
 
 
 import Parameters from "./componentes/parameters";
@@ -132,7 +132,7 @@ class App extends Component {
 			).catch((error) =>{
 				
 					//this.seterror(true)
-					//this.setSugerencias(res.data)
+					this.setSugerencias(prueba)
 					console.log("res.data")
 					console.log(error.response.data)
 
