@@ -86,7 +86,36 @@ class App extends Component {
 		})
 		console.log(this.state)
 
-    }
+	}
+	
+	postRequest=()=>{
+		fetch('https://code-style-analyzer.herokuapp.com/java/code-analysis/',{
+        method: 'POST',
+        body: JSON.stringify(
+			{
+			"complexity": 3,
+			"prnom": "2",
+			"maxLenghtName": 3,
+			"maxLenghtLinesBy": 4,
+			"maxLenghtLineComment": 5,
+			"maxClassByFile": 1,
+			"maxNumFuntionByClass": 6,
+			"text": ""
+			}
+			),
+		cache: 'no-cache',
+		mode: "no-cors"
+		})
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(data) {
+			console.log('data = ', data);
+		})
+		.catch(function(err) {
+			console.error(err);
+		});
+	}
 
 	render(){
 
@@ -115,7 +144,10 @@ class App extends Component {
         <nav className="dark-primary-color navbar">
           <span className="text-primary-color navbar-brand mb-0 h1">Analizador sintantico Java</span>
           <button className= "btn btn-outline-light"
-		  onClick={() => { this.Analizar(prueja) }}
+		  onClick={() => { 
+			  this.Analizar(prueja) 
+				this.postRequest()
+			}}
 		  >Analizar</button>
         </nav>    
       </header>
