@@ -91,6 +91,9 @@ class App extends Component {
 	postRequest=()=>{
 		fetch('https://code-style-analyzer.herokuapp.com/java/code-analysis/',{
         method: 'POST',
+        headers: {
+			'Content-Type': 'application/json',
+        },
         body: JSON.stringify(
 			{
 			"complexity": 3,
@@ -103,8 +106,7 @@ class App extends Component {
 			"text": ""
 			}
 			),
-		cache: 'no-cache',
-		mode: "no-cors"
+		cache: 'no-cache'
 		})
 		.then(function(response) {
 			return response.json();
