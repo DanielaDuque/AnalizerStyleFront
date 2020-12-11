@@ -92,19 +92,19 @@ class App extends Component {
 		fetch('https://code-style-analyzer.herokuapp.com/java/code-analysis/',{
         method: 'POST',
         headers: {
+			 'Accept': 'application/json',
 			'Content-Type': 'application/json',
         },
         body: JSON.stringify(
 			{
-			"complexity": 3,
-			"prnom": "2",
-			"maxLenghtName": 3,
-			"maxLenghtLinesBy": 4,
-			"maxLenghtLineComment": 5,
-			"maxClassByFile": 1,
-			"maxNumFuntionByClass": 6,
-			"text": ""
-			}
+			complexity: 3,
+			prnom: "2",
+			maxLenghtName: 3,
+			maxLenghtLinesBy: 4,
+			maxLenghtLineComment: 5,
+			maxClassByFile: 1,
+			maxNumFuntionByClass: 6,
+			text: ""}
 			),
 		cache: 'no-cache'
 		})
