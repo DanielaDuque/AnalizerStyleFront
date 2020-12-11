@@ -108,13 +108,13 @@ class App extends Component {
 		const deptsURL = "https://code-style-analyzer.herokuapp.com/java/code-analysis/";
 		var vAttributes = {};
 		vAttributes = {
-			complexity: 3,
-			prnom: "2",
-			maxLenghtName: 3,
-			maxLenghtLinesBy: 4,
-			maxLenghtLineComment: 1,
-			maxClassByFile: 1,
-			maxNumFuntionByClass: 6,
+			complexity: this.state.Complejidad,
+			prnom: this.state.prNombr,
+			maxLenghtName: this.state.maxCaracterByFuntion,
+			maxLenghtLinesBy: this.state.maxLinesByFuntion,
+			maxLenghtLineComment: this.state.maxLenghtLineComment,
+			maxClassByFile: this.state.maxClassByFile,
+			maxNumFuntionByClass: this.state.maxNumFuntionByClass,
 			text: this.state.textInput
 		};
 		const ops = {
