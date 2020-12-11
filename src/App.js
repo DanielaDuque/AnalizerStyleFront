@@ -1,5 +1,6 @@
 import './App.css';
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import "./estilos/palette.css"
 
@@ -21,10 +22,24 @@ class App extends Component {
         maxLineComment: 0,
         maxClass: 0,
 		maxFuntionByClass: 0,
-		sugerencias: []
+		sugerencias: [],
+		textInput:"",
+		error: false
 
     }
-    
+	
+	setText = (param) =>{
+        this.setState({
+            textInput: param
+        })
+             
+    }
+	seterror = (param) =>{
+        this.setState({
+            error: param
+        })
+             
+    }
     setprNombr = (param) =>{
         this.setState({
             prNombr: param
@@ -80,7 +95,7 @@ class App extends Component {
         })
              
     }
-	Analizar = (param) => {
+	setSugerencias = (param) => {
         this.setState({
             sugerencias: param
 		})
@@ -89,34 +104,42 @@ class App extends Component {
 	}
 	
 	postRequest=()=>{
-		fetch('https://code-style-analyzer.herokuapp.com/java/code-analysis/',{
-        method: 'POST',
-        headers: {
-			 'Accept': 'application/json',
-			'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(
-			{
-			complexity: 3,
-			prnom: "2",
-			maxLenghtName: 3,
-			maxLenghtLinesBy: 4,
-			maxLenghtLineComment: 5,
-			maxClassByFile: 1,
-			maxNumFuntionByClass: 6,
-			text: ""}
-			),
-		cache: 'no-cache'
-		})
-		.then(function(response) {
-			return response.json();
-		})
-		.then(function(data) {
-			console.log('data = ', data);
-		})
-		.catch(function(err) {
-			console.error(err);
-		});
+
+		const deptsURL = "https://code-style-analyzer.herokuapp.com/java/code-analysis/";
+		var vAttributes = {};
+		vAttributes = {
+			complexity: this.state.Complejidad,
+			prnom: this.state.prNombr,
+			maxLenghtName: this.state.maxCaracterByFuntion,
+			maxLenghtLinesBy: this.state.maxLinesByFuntion,
+			maxLenghtLineComment: this.state.maxLenghtLineComment,
+			maxClassByFile: this.state.maxClassByFile,
+			maxNumFuntionByClass: this.state.maxNumFuntionByClass,
+			text: this.state.textInput
+		};
+		const ops = {
+			method: 'POST',
+			headers: { 'content-type': 'application/json' },
+			data: JSON.stringify(vAttributes) ,
+			url: deptsURL
+		};
+
+		axios( ops).then((res) => {
+				if (res.status === 202){
+					console.log(res.data)
+				}
+			}
+			).catch((error) =>{
+				
+					//this.seterror(true)
+					//this.setSugerencias(res.data)
+					console.log("res.data")
+					console.log(error.response.data)
+
+				
+			});
+		
+
 	}
 
 	render(){
@@ -147,7 +170,7 @@ class App extends Component {
           <span className="text-primary-color navbar-brand mb-0 h1">Analizador sintantico Java</span>
           <button className= "btn btn-outline-light"
 		  onClick={() => { 
-			  this.Analizar(prueja) 
+			 	//this.setSugerencias(prueja) 
 				this.postRequest()
 			}}
 		  >Analizar</button>
@@ -176,7 +199,13 @@ class App extends Component {
 				<div className="input-group-prepend">
 					<span className="input-group-text"></span>
 				</div>
-				<textarea className="form-control" aria-label="With textarea" rows="15"></textarea>
+				<textarea className="form-control" aria-label="With textarea" rows="15"
+				id = "text_input"
+				onChange={()=>{
+					let textInput = document.getElementById("text_input").value;
+					//console.log(text)
+					this.setText(textInput)
+				}}></textarea>
 				</div>
             </div>
 
