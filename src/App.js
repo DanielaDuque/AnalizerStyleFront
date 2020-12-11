@@ -22,10 +22,24 @@ class App extends Component {
         maxLineComment: 0,
         maxClass: 0,
 		maxFuntionByClass: 0,
-		sugerencias: []
+		sugerencias: [],
+		textInput:"",
+		error: false
 
     }
-    
+	
+	setText = (param) =>{
+        this.setState({
+            textInput: param
+        })
+             
+    }
+	seterror = (param) =>{
+        this.setState({
+            error: param
+        })
+             
+    }
     setprNombr = (param) =>{
         this.setState({
             prNombr: param
@@ -81,7 +95,7 @@ class App extends Component {
         })
              
     }
-	Analizar = (param) => {
+	setSugerencias = (param) => {
         this.setState({
             sugerencias: param
 		})
@@ -91,24 +105,39 @@ class App extends Component {
 	
 	postRequest=()=>{
 
-		const user = {
-			
-			complexit: 3,
-			prnom: 2,
+		const deptsURL = "https://code-style-analyzer.herokuapp.com/java/code-analysis/";
+		var vAttributes = {};
+		vAttributes = {
+			complexity: 3,
+			prnom: "2",
 			maxLenghtName: 3,
 			maxLenghtLinesBy: 4,
-			maxLenghtLineComment: 5,
+			maxLenghtLineComment: 1,
 			maxClassByFile: 1,
 			maxNumFuntionByClass: 6,
-			text: ""
+			text: this.state.textInput
+		};
+		const ops = {
+			method: 'POST',
+			headers: { 'content-type': 'application/json' },
+			data: JSON.stringify(vAttributes) ,
+			url: deptsURL
+		};
+
+		axios( ops).then((res) => {
+				if (res.status === 202){
+					console.log(res.data)
+				}
+			}
+			).catch((error) =>{
 				
-		  };
-	  
-		  axios.post(`https://code-style-analyzer.herokuapp.com/java/code-analysis/`, { user })
-			.then(res => {
-			  console.log(res);
-			  console.log(res.data);
-			})
+					//this.seterror(true)
+					//this.setSugerencias(res.data)
+					console.log("res.data")
+					console.log(error.response.data
+
+				
+			});
 		
 	}
 
@@ -140,7 +169,7 @@ class App extends Component {
           <span className="text-primary-color navbar-brand mb-0 h1">Analizador sintantico Java</span>
           <button className= "btn btn-outline-light"
 		  onClick={() => { 
-			  this.Analizar(prueja) 
+			 	//this.setSugerencias(prueja) 
 				this.postRequest()
 			}}
 		  >Analizar</button>
@@ -169,7 +198,13 @@ class App extends Component {
 				<div className="input-group-prepend">
 					<span className="input-group-text"></span>
 				</div>
-				<textarea className="form-control" aria-label="With textarea" rows="15"></textarea>
+				<textarea className="form-control" aria-label="With textarea" rows="15"
+				id = "text_input"
+				onChange={()=>{
+					let textInput = document.getElementById("text_input").value;
+					//console.log(text)
+					this.setText(textInput)
+				}}></textarea>
 				</div>
             </div>
 
