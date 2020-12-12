@@ -13,13 +13,13 @@ class Parameters extends Component {
             <div className="row">
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                        <span className="input-group-text" id="basic-addon3">Pr</span>
+                        <span className="input-group-text" id="basic-addon3">#</span>
                     </div>
-                    <input type="text" className="form-control" id="Prefijo" aria-describedby="basic-addon3"
-                    placeholder="Prefijos en Nombre" aria-label="Prefijo"
+                    <input type="number" className="form-control" id="LinasF" aria-describedby="basic-addon3"
+                    placeholder="Lineas por funcion" aria-label="LinasF"
                     onChange={()=>{
-                        let text = document.getElementById("Prefijo").value;
-                        this.props.setprNombr(text)
+                        let text = document.getElementById("LinasF").value;
+                        this.props.setmaxLinesByFuntion(text)
                         }} />
                 
                 </div>
@@ -65,11 +65,11 @@ class Parameters extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="basic-addon3">#</span>
                     </div>
-                    <input type="number" className="form-control" id="LinasF" aria-describedby="basic-addon3"
-                    placeholder="Lineas por funcion" aria-label="LinasF"
+                    <input type="number" className="form-control" id="MinLineasC" aria-describedby="basic-addon3"
+                    placeholder="Min lineas comentadas" aria-label="MinLineasC"
                     onChange={()=>{
-                        let text = document.getElementById("LinasF").value;
-                        this.props.setmaxLinesByFuntion(text)
+                        let text = document.getElementById("MinLineasC").value;
+                        this.props.setminLineComment(text)
                         }}/>
                 </div>
             </div>
@@ -78,10 +78,10 @@ class Parameters extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="basic-addon3">#</span>
                     </div>
-                    <input type="number" className="form-control" id="LineasC" aria-describedby="basic-addon3"
-                    placeholder="Lineas comentadas" aria-label="LineasC"
+                    <input type="number" className="form-control" id="MaxLineasC" aria-describedby="basic-addon3"
+                    placeholder="Max lineas comentadas" aria-label="MaxLineasC"
                     onChange={()=>{
-                        let text = document.getElementById("LineasC").value;
+                        let text = document.getElementById("MaxLineasC").value;
                         this.props.setmaxLineComment(text)
                         }}/>
                 </div>

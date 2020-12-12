@@ -10,6 +10,8 @@ import "./estilos/palette.css"
 import "./App.css"
 
 import logo2 from "./logo2.png"
+import exito from "./exito.png"
+import exito2 from "./exito2.png"
 
 import prueba from "./prueja.json"
 
@@ -23,7 +25,7 @@ class App extends Component {
 
 	state={
 
-        prNombr : "",
+        minLineComment : 0,
         Complejidad : 0,
         maxCaracterByFuntion : 0,
         maxLinesByFuntion: 0,
@@ -33,6 +35,7 @@ class App extends Component {
 		sugerencias: [],
 		textInput:"",
 		error: false,
+		image: false,
 
     }
 	
@@ -48,9 +51,9 @@ class App extends Component {
         })
              
     }
-    setprNombr = (param) =>{
+    setminLineComment = (param) =>{
         this.setState({
-            prNombr: param
+            minLineComment: param
         })
              
     }
@@ -110,6 +113,14 @@ class App extends Component {
 		console.log(this.state)
 
 	}
+
+
+	setImage = (param) => {
+		this.setState({
+            image: param
+		})
+		console.log(this.state)
+	}
 	
 	postRequest=()=>{
 
@@ -117,14 +128,15 @@ class App extends Component {
 		var vAttributes = {};
 		vAttributes = {
 			complexity: this.state.Complejidad,
-			prnom: this.state.prNombr,
-			maxLenghtName: this.state.maxCaracterByFuntion,
-			maxLenghtLinesBy: this.state.maxLinesByFuntion,
-			maxLenghtLineComment: this.state.maxLenghtLineComment,
-			maxClassByFile: this.state.maxClassByFile,
-			maxNumFuntionByClass: this.state.maxNumFuntionByClass,
+			minCommentedLinesCount: this.state.minLenghtLineComment,
+			maxNameLength: this.state.maxCaracterByFuntion,
+			maxLineCountByFunction: this.state.maxLinesByFuntion,
+			maxCommentedLinesCount: this.state.maxLenghtLineComment,
+			maxClassesByFile: this.state.maxClassByFile,
+			maxFunctionCountByClass: this.state.maxNumFuntionByClass,
 			text: this.state.textInput
 		};
+
 		const ops = {
 			method: 'POST',
 			headers: { 'content-type': 'application/json' },
@@ -133,16 +145,20 @@ class App extends Component {
 		};
 
 		axios( ops).then((res) => {
-				if (res.status === 202){
-					console.log(res.data)
+				if (res.data.leght()>0){
+					this.setImage(false) //oculta imagen
+					this.setSugerencias(prueba)
+				}else{
+					this.setImage(true) //muestra imagen
 				}
+
+				
 			}
 			).catch((error) =>{
-				
-					//this.seterror(true)
 					this.setSugerencias(prueba)
 					console.log("res.data")
-					console.log(error.response.data)
+					// console.log(error.response.data)
+					// this.setImage(true)
 				
 			});
 		
@@ -161,10 +177,13 @@ class App extends Component {
 						
                         <Sugerencia
 							key={index}
-							error = {data.error}
-							sugerencia =  {data.sugerencia}
-							linea =  {data.linea}
-							col =  {data.col}  	
+							error = {data.errorMessage}
+							sugerencia =  {data.suggestion}
+							linea =  {data.line}
+							col =  {data.column}  	
+							hasCorr = {data.hasCorrection}
+							prevCode = {data.previousCode}
+							correctedCode = {data.correctedCode}
 						/>)
 					
 					return null;
@@ -183,7 +202,7 @@ class App extends Component {
 	  	<div className="container columna">
 			<h2 className="cont font-change">Parámetros personalizables</h2>
 			<Parameters 
-				setprNombr = {this.setprNombr}
+				setminLineComment = {this.setminLineComment}
 				setComplejidad = {this.setComplejidad}			
 				setmaxCaracterByFuntion = {this.setmaxCaracterByFuntion}			
 				setmaxLinesByFuntion = {this.setmaxLinesByFuntion}			
@@ -204,7 +223,7 @@ class App extends Component {
 					<div className = "">
 						<button className= "btn button-color "
 							onClick={() => { 
-									this.setSugerencias(prueba) //COMENTAR
+									// this.setSugerencias(prueba) //COMENTAR
 									this.postRequest()
 								}}
 							>Analizar</button>
@@ -230,9 +249,14 @@ class App extends Component {
 
             <div className = "col-lg-5 contfin ">
               	<h2 className = "font-change">Sugerencias</h2>
+
+				  {this.state.image ? (
+					<img alt="exito" src={exito2} className="mx-auto d-block img-fluid" width="340px"></img>
+					) : <div> </div>}
+
 				  <div className="row row-cols-1 scroll">			  	
                 	{table}
-				</div>
+				</div>	
 
             </div>
 

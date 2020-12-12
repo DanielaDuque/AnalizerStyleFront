@@ -1,14 +1,22 @@
 [
     {
-        "error": "error1",
-        "linea": 1,
-        "col": 2,
-        "sugerencia":"sugerencia1" 
+        "errorMessage": "error1",
+        "line": 1,
+        "column": 2,
+        "suggestion":"sugerencia1",
+        "hasCorrection": "true",
+        "previousCode": "prev1",
+        "correctedCode": "corrected1"
     },
     {
-        "error": "error2",
-        "linea": 1,
-        "col": 2
+        "errorMessage": "error2",
+        "line": 1,
+        "column": 2,
+        "suggestion": "sugerencia2",
+        "hasCorrection": "false",
+        "previousCode": "prev2",
+        "correctedCode": "corrected2"
+        
     }
     
 ]
