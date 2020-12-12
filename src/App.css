@@ -10,6 +10,7 @@
 body{
   font-family: 'Lato', sans-serif;
   font-weight: 300!important;
+  padding: 10px;
 }
 
 .font-change{
@@ -30,6 +31,12 @@ h1{
 
 h2{
   margin: 20px;
+}
+
+.scroll {
+  height: 500px;       /* Just for the demo          */
+  overflow-y: auto;    /* Trigger vertical scroll    */
+  overflow-x: hidden;  /* Hide the horizontal scroll */
 }
 
 @keyframes App-logo-spin {

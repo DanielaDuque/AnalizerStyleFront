@@ -33,7 +33,6 @@ class App extends Component {
 		sugerencias: [],
 		textInput:"",
 		error: false,
-		code: "",
 
     }
 	
@@ -202,7 +201,7 @@ class App extends Component {
 						<h2 className = "font-change">Codigo</h2>
 					</div>
 					<div className = "">
-						<button className= "btn btn-dark "
+						<button className= "btn button-color "
 							onClick={() => { 
 									this.setSugerencias(prueja) //COMENTAR
 									this.postRequest()
@@ -228,9 +227,9 @@ class App extends Component {
 				</div>
             </div>
 
-            <div className = "col-lg-5 contfin">
+            <div className = "col-lg-5 contfin ">
               	<h2 className = "font-change">Sugerencias</h2>
-				  <div className="row row-cols-1">			  	
+				  <div className="row row-cols-1 scroll">			  	
                 	{table}
 				</div>
 
@@ -241,11 +240,9 @@ class App extends Component {
         
       </body>
 		<footer class="page-footer font-small blue footer-space">
-
-		<div class="footer-copyright text-center py-3">
-			<p> Lenguajes de Programación 2020-2</p>
-		</div>
-
+			<div class="footer-copyright text-center py-3">
+				<p> Lenguajes de Programación 2020-2</p>
+			</div>
 		</footer>
     </div>
 	
