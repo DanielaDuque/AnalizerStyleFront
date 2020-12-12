@@ -7,9 +7,13 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
     "axios": "^0.21.0",
+    "brace": "^0.11.1",
+    "prismjs": "^1.22.0",
     "react": "^17.0.1",
+    "react-ace": "^9.2.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
+    "react-simple-code-editor": "^0.11.0",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

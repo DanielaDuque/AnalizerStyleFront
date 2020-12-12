@@ -2,13 +2,21 @@ import './App.css';
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import AceEditor from 'react-ace';
+import 'brace/mode/java'
+import 'brace/theme/monokai'
+
 import "./estilos/palette.css"
+import "./App.css"
+
+import logo2 from "./logo2.png"
 
 import prueja from "./prueja.json"
 
 
 import Parameters from "./componentes/parameters";
 import Sugerencia from "./componentes/sugerencia";
+
 
 
 class App extends Component {
@@ -24,7 +32,8 @@ class App extends Component {
 		maxFuntionByClass: 0,
 		sugerencias: [],
 		textInput:"",
-		error: false
+		error: false,
+		code: "",
 
     }
 	
@@ -134,12 +143,12 @@ class App extends Component {
 					//this.seterror(true)
 					//this.setSugerencias(res.data)
 					console.log("res.data")
-					console.log(error.response.data
-
+					console.log(error.response.data)
 				
 			});
 		
 	}
+
 
 	render(){
 
@@ -165,19 +174,14 @@ class App extends Component {
     <div>
       <header>  
 		
-        <nav className="dark-primary-color navbar">
-          <span className="text-primary-color navbar-brand mb-0 h1">Analizador sintantico Java</span>
-          <button className= "btn btn-outline-light"
-		  onClick={() => { 
-			 	//this.setSugerencias(prueja) 
-				this.postRequest()
-			}}
-		  >Analizar</button>
+        <nav className="navbar navbar-light">
+		  <img alt="Brand" src={logo2} className="navbar-brand mx-auto d-block img-fluid" width="500px"></img>
+          
         </nav>    
       </header>
       <body>
-	  	<div className="container">
-			<h1>Párametros personalizables</h1>
+	  	<div className="container columna">
+			<h2 className="cont font-change">Parámetros personalizables</h2>
 			<Parameters 
 				setprNombr = {this.setprNombr}
 				setComplejidad = {this.setComplejidad}			
@@ -193,23 +197,39 @@ class App extends Component {
           <div className = "row row justify-content-between">
 
             <div className = "col-lg-6">
-              <h2>Codigo</h2>
-			  	<div className="input-group">
-				<div className="input-group-prepend">
-					<span className="input-group-text"></span>
+				<div className = "text-button separe-items">
+					<div className = "">
+						<h2 className = "font-change">Codigo</h2>
+					</div>
+					<div className = "">
+						<button className= "btn btn-dark "
+							onClick={() => { 
+									this.setSugerencias(prueja) //COMENTAR
+									this.postRequest()
+								}}
+							>Analizar</button>
+					</div>
 				</div>
-				<textarea className="form-control" aria-label="With textarea" rows="15"
-				id = "text_input"
-				onChange={()=>{
-					let textInput = document.getElementById("text_input").value;
-					//console.log(text)
-					this.setText(textInput)
-				}}></textarea>
+              
+			  	<div className="input-group">
+					<div className="input-group-prepend">
+						<span className="input-group-text"></span>
+					</div>
+
+					<AceEditor  
+						mode="javascript" 
+						theme="monokai"
+						onChange={(code)=>{
+							console.log(code)
+							this.setText(code)
+						}}
+					/>
+		
 				</div>
             </div>
 
-            <div className = "col-lg-5">
-              	<h2>Sugerencias</h2>
+            <div className = "col-lg-5 contfin">
+              	<h2 className = "font-change">Sugerencias</h2>
 				  <div className="row row-cols-1">			  	
                 	{table}
 				</div>
@@ -220,7 +240,15 @@ class App extends Component {
         </div>
         
       </body>
+		<footer class="page-footer font-small blue footer-space">
+
+		<div class="footer-copyright text-center py-3">
+			<p> Lenguajes de Programación 2020-2</p>
+		</div>
+
+		</footer>
     </div>
+	
   );
 }
 }
