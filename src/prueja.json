@@ -9,19 +9,6 @@
         "error": "error2",
         "linea": 1,
         "col": 2,
-        "sugerencia":"sugerencia2" 
-    },
-    {
-        "error": "error2",
-        "linea": 1,
-        "col": 2,
-        "sugerencia":"sugerencia2" 
-    },
-    {
-        "error": "error2",
-        "linea": 1,
-        "col": 2,
-        "sugerencia":"sugerencia2" 
     }
     
 ]
