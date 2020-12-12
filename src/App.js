@@ -204,7 +204,7 @@ class App extends Component {
 					<div className = "">
 						<button className= "btn button-color "
 							onClick={() => { 
-									this.setSugerencias(prueja) //COMENTAR
+									this.setSugerencias(prueba) //COMENTAR
 									this.postRequest()
 								}}
 							>Analizar</button>
