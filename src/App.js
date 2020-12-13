@@ -152,9 +152,11 @@ class App extends Component {
 					this.setSugerencias(prueba)
 				}else{
 					this.setImage(true) //muestra imagen
+					this.setSugerencias([])
 				}
 			*/
 			this.setImage(true) //muestra imagen
+			this.setSugerencias([])
 				
 			}
 			).catch((error) =>{
@@ -273,12 +275,12 @@ class App extends Component {
 
 				  {this.state.image ? (
 					<img alt="exito" src={exito2} className="mx-auto d-block img-fluid" width="340px"></img>
-					) : <div> </div>}
-
-				  <div className="row row-cols-1 scroll"
-				  	style={{paddingRight:"15px"}}>			  	
-                	{table}
-				</div>	
+					) : (
+						<div className="row row-cols-1 scroll"
+				  			style={{paddingRight:"15px"}}>			  	
+                		{table}
+						</div>	
+					)}
 
             </div>
 

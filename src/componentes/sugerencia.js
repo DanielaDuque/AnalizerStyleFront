@@ -41,7 +41,7 @@ export default function Sugerencia(props) {
 
     return(
         <div className="card shadow p-3 mb-5 bg-white rounded">
-            <h4 className="card-header ">{props.error}</h4>
+            <h4 className="card-header " >{props.error}</h4>
             <div className="card-body">
                 <div className= "container">
                     <div className ="row justify-content-start card-subtitle mb-2 text-muted text-left ">
