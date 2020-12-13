@@ -10,7 +10,6 @@ import "./estilos/palette.css"
 import "./App.css"
 
 import logo2 from "./logo2.png"
-import exito from "./exito.png"
 import exito2 from "./exito2.png"
 
 import prueba from "./prueja.json"
@@ -110,7 +109,7 @@ class App extends Component {
         this.setState({
             sugerencias: param
 		})
-		console.log(this.state)
+		//console.log(this.state)
 
 	}
 
@@ -119,7 +118,7 @@ class App extends Component {
 		this.setState({
             image: param
 		})
-		console.log(this.state)
+		//console.log(this.state)
 	}
 	
 	postRequest=()=>{
@@ -145,23 +144,42 @@ class App extends Component {
 		};
 
 		axios( ops).then((res) => {
+					console.log("res.data")
+					console.log(res)
+			/* Correcto descomentar al emparejar con el back
 				if (res.data.leght()>0){
 					this.setImage(false) //oculta imagen
 					this.setSugerencias(prueba)
 				}else{
 					this.setImage(true) //muestra imagen
 				}
-
+			*/
+			this.setImage(true) //muestra imagen
 				
 			}
 			).catch((error) =>{
+					//Quitar al unir con el back
+					this.setImage(false) //oculta imagen
 					this.setSugerencias(prueba)
-					console.log("res.data")
-					// console.log(error.response.data)
+					console.log("error.data")
+					console.log(error)
 					// this.setImage(true)
 				
 			});
 		
+
+	}
+
+	correctText=(prev,correct)=>{
+		
+		let text = this.state.textInput
+		//console.log(text)
+		let newtext = text.replaceAll(prev, correct)
+		//console.log(newtext)
+		this.refs.aceEditor.editor.setValue(newtext)
+		this.setState({
+			textInput: newtext
+		})
 
 	}
 
@@ -172,7 +190,7 @@ class App extends Component {
 
         this.state.sugerencias.map(
             (data, index) => {
-				console.log(data)
+				//console.log(data)
                     table.push(
 						
                         <Sugerencia
@@ -184,6 +202,7 @@ class App extends Component {
 							hasCorr = {data.hasCorrection}
 							prevCode = {data.previousCode}
 							correctedCode = {data.correctedCode}
+							correctText ={this.correctText}
 						/>)
 					
 					return null;
@@ -221,12 +240,13 @@ class App extends Component {
 						<h2 className = "font-change">Codigo</h2>
 					</div>
 					<div className = "">
-						<button className= "btn button-color "
+						<button className= "btn button-color"
 							onClick={() => { 
 									// this.setSugerencias(prueba) //COMENTAR
 									this.postRequest()
 								}}
-							>Analizar</button>
+							>Analizar
+						</button>
 					</div>
 				</div>
               
@@ -238,8 +258,9 @@ class App extends Component {
 					<AceEditor  
 						mode="javascript" 
 						theme="monokai"
+						ref="aceEditor"
 						onChange={(code)=>{
-							console.log(code)
+							//console.log(code)
 							this.setText(code)
 						}}
 					/>
@@ -254,7 +275,8 @@ class App extends Component {
 					<img alt="exito" src={exito2} className="mx-auto d-block img-fluid" width="340px"></img>
 					) : <div> </div>}
 
-				  <div className="row row-cols-1 scroll">			  	
+				  <div className="row row-cols-1 scroll"
+				  	style={{paddingRight:"15px"}}>			  	
                 	{table}
 				</div>	
 
@@ -264,8 +286,8 @@ class App extends Component {
         </div>
         
       </body>
-		<footer class="page-footer font-small blue footer-space">
-			<div class="footer-copyright text-center py-3">
+		<footer className="page-footer font-small blue footer-space">
+			<div className="footer-copyright text-center py-3">
 				<p> Lenguajes de Programación 2020-2</p>
 			</div>
 		</footer>
