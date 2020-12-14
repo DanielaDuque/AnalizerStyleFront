@@ -12,8 +12,6 @@ import './App.css';
 import logo2 from './logo2.png';
 import exito2 from './exito2.png';
 
-import prueba from './prueja.json';
-
 import Parameters from './componentes/parameters';
 import Sugerencia from './componentes/sugerencia';
 
@@ -127,7 +125,7 @@ class App extends Component {
       .then((res) => {
         console.log('res.data');
         console.log(res);
-        if (res.data.length == 0) {
+        if (res.data.length === 0) {
           this.setImage(true); //muestra imagen
         } else {
           this.setImage(false);
