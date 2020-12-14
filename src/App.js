@@ -127,7 +127,7 @@ class App extends Component {
       .then((res) => {
         console.log('res.data');
         console.log(res);
-        if (res.data.letngth == 0) {
+        if (res.data.length == 0) {
           this.setImage(true); //muestra imagen
         } else {
           this.setImage(false);
