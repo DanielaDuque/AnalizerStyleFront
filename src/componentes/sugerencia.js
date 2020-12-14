@@ -57,7 +57,6 @@ export default function Sugerencia(props) {
                 props.col,
                 props.sugerencia
               );
-              console.log(textOutput);
               const element = document.createElement('a');
               const file = new Blob([textOutput], {
                 type: 'text/plain;charset=utf-8',

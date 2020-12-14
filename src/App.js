@@ -91,14 +91,12 @@ class App extends Component {
     this.setState({
       sugerencias: param,
     });
-    //console.log(this.state)
   };
 
   setImage = (param) => {
     this.setState({
       image: param,
     });
-    //console.log(this.state)
   };
 
   postRequest = () => {
@@ -123,8 +121,6 @@ class App extends Component {
 
     axios(ops)
       .then((res) => {
-        console.log('res.data');
-        console.log(res);
         if (res.data.length === 0) {
           this.setImage(true); //muestra imagen
         } else {
@@ -134,8 +130,6 @@ class App extends Component {
       })
       .catch((error) => {
         alert('There was an error ' + error.message);
-        console.log('error.data');
-        console.log(error);
       });
   };
 
@@ -152,7 +146,6 @@ class App extends Component {
     let table = [];
 
     this.state.sugerencias.map((data, index) => {
-      //console.log(data)
       table.push(
         <Sugerencia
           key={index}
@@ -223,7 +216,6 @@ class App extends Component {
                     theme='monokai'
                     ref={(c) => (this.aceEditorRef = c)}
                     onChange={(code) => {
-                      //console.log(code)
                       this.setText(code);
                     }}
                   />
