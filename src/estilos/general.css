@@ -1,0 +1,49 @@
+.columna{
+    padding: 10px;
+    /* margin-top: 40px; */
+    /* margin-bottom: 40px; */
+}
+
+
+.cont{
+    margin-top: 40px;
+}
+
+
+.cont-parametros{
+    width: 100%;
+}
+
+.aspecto{
+    margin-bottom: 20px;
+}
+
+
+.text-button{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-right: 3%;
+    
+}
+
+.separe-items{
+    align-content: space-between;
+}
+
+
+.footer-space{
+    margin-top: 10px;
+}
+
+.button-color{
+    background-color: #db380e;
+    color: #ffffff;
+}
+.button-color-ouline{
+    color: #db380e; 
+}
+.button-card{
+    margin-right: 10px;
+}
